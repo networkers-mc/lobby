@@ -1,0 +1,11 @@
+name: HubPlugin
+main: es.networkersmc.hub.HubPlugin
+version: ${project.version}
+load: POSTWORLD
+depend: [DenderaBukkit]
+
+author: Alberto Mimbrero
+description: Hub service for the Networkers Minecraft network.
+website: https://github.com/NetworkersES/hub
+
+commands: {}
