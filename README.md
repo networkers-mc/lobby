@@ -1,2 +1,2 @@
-# The Networkers Minecraft network hub service
- Hub service for the Networkers Minecraft network
+# The Networkers Minecraft network lobby service
+ Lobby service for the Networkers Minecraft network

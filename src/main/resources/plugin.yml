@@ -1,11 +1,11 @@
-name: HubPlugin
-main: es.networkersmc.hub.HubPlugin
+name: LobbyPlugin
+main: es.networkersmc.lobby.LobbyPlugin
 version: ${project.version}
 load: POSTWORLD
 depend: [DenderaBukkit]
 
 author: Alberto Mimbrero
-description: Hub service for the Networkers Minecraft network.
-website: https://github.com/NetworkersES/hub
+description: Lobby service for the Networkers Minecraft network.
+website: https://github.com/NetworkersES/lobby
 
 commands: {}
