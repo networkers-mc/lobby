@@ -1,6 +1,8 @@
 package es.networkersmc.lobby.menu.games;
 
 import es.networkersmc.dendera.bukkit.gui.button.Button;
+import es.networkersmc.dendera.bukkit.gui.button.ClickAction;
+import es.networkersmc.dendera.bukkit.gui.button.ClickData;
 import es.networkersmc.dendera.bukkit.gui.button.DynamicButton;
 import es.networkersmc.dendera.bukkit.language.PlayerLanguageService;
 import es.networkersmc.dendera.docs.User;
@@ -16,6 +18,7 @@ public class NextOpeningButton {
 
     private final Instant openingTime;
     private final String name;
+    private final ClickAction clickAction;
     private final User user;
 
     private final DynamicButton dynamicButton;
@@ -25,34 +28,37 @@ public class NextOpeningButton {
 
         this.openingTime = openingTime;
         this.name = button.getName();
+        this.clickAction = button.getClickAction();
         this.user = user;
 
         this.dynamicButton = new DynamicButton(button, b -> b.setName(this.formatName()));
         this.dynamicButton.update();
 
-        button.setClickAction(clickData -> {
-            if (Instant.now().isAfter(openingTime)) {
-                button.getClickAction().onClick(clickData);
-                return;
-            }
-
-            Player player = clickData.player();
-            languageService.sendMessage(player, user, "");
-            player.closeInventory();
-        });
+        button.setClickAction(this::onClick);
     }
 
     public void update() {
         dynamicButton.update();
     }
 
+    private void onClick(ClickData clickData) {
+        if (Instant.now().isAfter(this.openingTime)) {
+            this.clickAction.onClick(clickData);
+            return;
+        }
+
+        Player player = clickData.player();
+        languageService.sendMessage(player, user, "menu.games.next-opening");
+        player.closeInventory();
+    }
+
     private String formatName() {
         Instant now = Instant.now();
 
-        if (now.isAfter(openingTime)) {
-            return name + "- §e§l" + languageService.getTranslation("commons.new", this.user);
+        if (now.isAfter(this.openingTime)) {
+            return this.name + "- §e§l" + languageService.getTranslation("commons.new", this.user);
         }
 
-        return name + " §f- §e" + DurationFormatUtils.formatDuration(Duration.between(now, openingTime).toMillis(), "d:HH:mm:ss");
+        return this.name + " §f- §e" + DurationFormatUtils.formatDuration(Duration.between(now, this.openingTime).toMillis(), "d:HH:mm:ss");
     }
 }
