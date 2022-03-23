@@ -38,6 +38,7 @@
 
     <build>
         <defaultGoal>clean install</defaultGoal>
+        <finalName>lobby</finalName>
         <resources>
             <resource>
                 <targetPath>.</targetPath>
