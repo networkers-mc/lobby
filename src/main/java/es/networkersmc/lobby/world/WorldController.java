@@ -6,6 +6,7 @@ import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
@@ -26,6 +27,11 @@ public class WorldController implements Module, Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent event) {
+        event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void onPlace(BlockPlaceEvent event) {
         event.setCancelled(true);
     }
 
