@@ -28,6 +28,7 @@ public class NextOpeningButton {
         this.user = user;
 
         this.dynamicButton = new DynamicButton(button, b -> b.setName(this.formatName()));
+        this.dynamicButton.update();
 
         button.setClickAction(clickData -> {
             if (Instant.now().isAfter(openingTime)) {
